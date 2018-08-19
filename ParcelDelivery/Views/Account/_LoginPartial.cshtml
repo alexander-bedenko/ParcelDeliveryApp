@@ -1,0 +1,19 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <i class="fa fa-check"><a href="#">Hello, @User.Identity.Name! </a></i>
+    <i class="fa fa-sign-out"><a href="@Url.Action("Logout", "Account")">Выйти </a></i>
+    if (!User.Identity.Name.Equals("Admin"))
+    {
+        <i class="fa fa-sign-out"><a href="@Url.Action("Edit", "Account")">Редактировать </a></i>
+    }
+
+    if (User.Identity.Name.Equals("Admin"))
+    {
+        <i class="fa fa-user"><a href="@Url.Action("Index", "Carrier")">Администрирование </a></i>
+    }
+}
+else
+{
+    <i class="fa fa-sign-in"><a href="@Url.Action("Login", "Account")">Войти </a></i>
+    <i class="fa fa-user-plus"><a href="@Url.Action("Register", "Account")">Зарегистрироваться</a></i>
+}

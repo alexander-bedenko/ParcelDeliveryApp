@@ -1,0 +1,38 @@
+﻿@model ParcelDelivery.Models.CarrierViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.LabelFor(model => model.Name)
+            <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Название" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Address)
+            <p>@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Адрес" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Phone)
+            <p>@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })</p>
+<p>@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Телефон" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Description)
+            <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Описание" } })</p>
+        </div>
+
+        <p><input type="submit" class="btn btn-primary" value="Добавить" /></p>
+    }
+</div>

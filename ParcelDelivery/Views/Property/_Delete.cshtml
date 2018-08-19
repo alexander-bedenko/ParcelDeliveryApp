@@ -1,0 +1,16 @@
+﻿@model ParcelDelivery.Models.PropertyViewModel
+
+<h3>Вы действительно хотите удалить данную услугу?</h3>
+<div>
+    <p>Номер.: @Html.DisplayFor(m => m.Id)</p>
+    <p>Стоимость: @Html.DisplayFor(m => m.Coast)</p>
+    <p>Максимальный вес: @Html.DisplayFor(m => m.MaxWeight)</p>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="submit" class="btn btn-primary" value="Удалить" />
+    }
+</div>

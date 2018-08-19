@@ -1,0 +1,42 @@
+﻿@using ParcelDelivery.Enums
+@model ParcelDelivery.Models.PropertyViewModel
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container py-3 col-md-6 col-lg-4 mx-auto">
+        <form>
+            <div class="form-group">
+                <h3 class="text-center">Введите интересующие параметры</h3>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.EditorFor(model => model.MaxWeight, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Максимальный вес, тонн" } })
+                    @Html.ValidationMessageFor(model => model.MaxWeight, "", new { @class = "text-danger" })
+                </div>
+                <div class="dropdown">
+                    <p>@Html.DropDownList("TypeOfCargo",
+                        EnumHelper.GetSelectList(typeof(TypeOfCargo)),
+                        "Выберите тип груза",
+                        new { @class = "form-control" })</p>
+                    @Html.ValidationMessageFor(model => model.TypeOfCargo, "", new { @class = "text-danger" })
+                </div>
+                <div class="dropdown">
+                    <p>
+                        @Html.DropDownList("TransportationArea",
+                            EnumHelper.GetSelectList(typeof(TransportationArea)),
+                            "Выберите область доставки",
+                            new { @class = "form-control" })
+                    </p>
+                    @Html.ValidationMessageFor(model => model.TransportationArea, "", new { @class = "text-danger" })
+                </div>
+ 
+                <input class="btn btn-primary btn-lg btn-block" style="min-width: 100%" type="submit" value="Подобрать" />
+
+            </div>
+        </form>
+    </div>
+}

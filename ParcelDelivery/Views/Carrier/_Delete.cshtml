@@ -1,0 +1,17 @@
+﻿@model ParcelDelivery.Models.CarrierViewModel
+
+<h3>Вы действительно хотите удалить данного курьера?</h3>
+<div>
+    <p>Номер.: @Html.DisplayFor(m => m.Id)</p>
+    <p>Название: @Html.DisplayFor(m => m.Name)</p>
+    <p>Адрес: @Html.DisplayFor(m => m.Address)</p>
+    <p>Телефон: @Html.DisplayFor(m => m.Phone)</p>
+    <p>Описание: @Html.DisplayFor(m => m.Description)</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="submit" class="btn btn-primary" value="Удалить" />
+    }
+</div>

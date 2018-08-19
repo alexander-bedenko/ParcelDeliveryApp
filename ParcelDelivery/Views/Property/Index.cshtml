@@ -1,0 +1,113 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using ParcelDelivery.Enums
+@using ParcelDelivery.Services
+@model IEnumerable<ParcelDelivery.Models.PropertyViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Услуги курьера</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/Content/lib/jquery/jquery-ui.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Список услуг</h2>
+        <table class="table table-bordered table-hover thead-dark">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Стоимость за 1 км.
+                    </th>
+                    <th>
+                        Максимальный вес
+                    </th>
+                    <th>
+                        Тип груза
+                    </th>
+                    <th>
+                        География доставки
+                    </th>
+                    <th>
+                        Действия
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Id</td>
+                        <td>@c.Coast</td>
+                        <td>@c.MaxWeight</td>
+                        <td>@c.TypeOfCargo.GetDisplayName()</td>
+                        <td>@c.TransportationArea.GetDisplayName()</td>
+                        <td>
+                            @Html.ActionLink("Изменить", "Edit", "Property", new { id = c.Id },
+                                new { @class = "viewDialog", data_dialog_title = "Редактирование услуги" }) |
+                                     @Html.ActionLink("Удалить", "Delete", "Property", new { id = c.Id },
+                                new { @class = "viewDialog", data_dialog_title = "Удаление услуги" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>@Html.ActionLink("Добавить услугу", "Create", "Property", new { id = @Url.RequestContext.RouteData.Values["id"] }, new { @class = "btn btn-primary btn-lg viewDialog", data_dialog_title = "Добавление услуги" })</p>
+        
+        <style type="text/css">
+            .dialogWithDropShadow
+            {
+                -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  
+                -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+            }
+        </style>
+
+        <script>
+            $(document).ready(function () {
+
+                $.ajaxSetup({ cache: false });
+
+                $(".viewDialog").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("<div></div>")
+                        .addClass("dialog")
+                        .appendTo("body")
+                        .dialog({
+                            title: $(this).attr("data-dialog-title"),
+                            show: 'slide',
+                            hide: 'slide',
+                            dialogClass: 'dialogWithDropShadow',
+                            close: function () { $(this).remove() },
+                            modal: true
+                        })
+                        .load(this.href);
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
