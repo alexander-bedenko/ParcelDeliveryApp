@@ -1,0 +1,16 @@
+﻿@model ParcelDelivery.Models.FeedbackViewModel
+
+<h3>Вы действительно хотите удалить отзыв?</h3>
+<div>
+    <p>Номер.: @Html.DisplayFor(m => m.Id)</p>
+    <p>Название: @Html.DisplayFor(m => m.Name)</p>
+    <p>Email: @Html.DisplayFor(m => m.Email)</p>
+    <p>Отзыв: @Html.DisplayFor(m => m.Message)</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="submit" class="btn btn-primary" value="Удалить" />
+    }
+</div>

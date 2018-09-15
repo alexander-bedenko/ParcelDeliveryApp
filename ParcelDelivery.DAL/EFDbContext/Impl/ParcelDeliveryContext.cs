@@ -14,6 +14,7 @@ namespace ParcelDelivery.DAL.EFDbContext.Impl
         public DbSet<User> Users { get; set; }
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<Property> Properties { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,6 +29,11 @@ namespace ParcelDelivery.DAL.EFDbContext.Impl
 
             modelBuilder.Entity<Carrier>()
                 .HasMany(p => p.Properties)
+                .WithRequired(c => c.Carrier)
+                .HasForeignKey(c => c.CarrierId);
+
+            modelBuilder.Entity<Carrier>()
+                .HasMany(p => p.Feedbacks)
                 .WithRequired(c => c.Carrier)
                 .HasForeignKey(c => c.CarrierId);
 

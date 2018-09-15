@@ -1,0 +1,36 @@
+﻿@model ParcelDelivery.Models.FeedbackViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.LabelFor(model => model.Name)
+            <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Имя" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Email)
+            <p>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Email" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Message)
+            <p>@Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })</p>
+            <p>@Html.TextAreaFor(model => model.Message, 5, 56, new { htmlAttributes = new { @class = "form-control", placeholder = "Отзыв" } })</p>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Rating)
+            <p>@Html.DropDownListFor(m => m.Rating, Enumerable.Range(1, 5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.Rating), @class = "form-control" })</p>
+        </div>
+
+        <p><input type="submit" class="btn btn-primary" value="Добавить" /></p>
+    }
+</div>

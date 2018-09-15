@@ -4,50 +4,84 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Отфильтрованный список грузоперевозщиков</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#table').DataTable();
-            } );
-        </script>
-    </head>
-<body>
-    <table id="table" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th>Адрес</th>
-                <th>Телефон</th>
-                <th>Описание</th>
-                <th>Стоимость за 1 км.</th>
-            </tr>
-        </thead>
-        <tbody>
-        @if (Model != null)
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Отфильтрованный список грузоперевозщиков</title>
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    </script>
+</head>
+<body class="container">
+
+<section id="topbar" class="d-none d-lg-block">
+    <div class="container clearfix">
+        <div class="contact-info float-left">
+            @Html.ActionLink("   На главную", "Index", "Home", new { }, new { @class = "card-link fa fa-home" })
+            <i class="fa fa-phone"></i> +375 29 6-000-000
+        </div>
+        <div class="social-links float-right">
+            @Html.Partial("~/Views/Account/_LoginPartial.cshtml")
+        </div>
+    </div>
+</section>
+
+<table id="table" class="table table-striped table-bordered" style="width: 100%">
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+        <th>Описание</th>
+        <th>Стоимость</th>
+        <th>Время</th>
+        <th>Рейтинг</th>
+        <th>Отзывы</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
         {
-            foreach (var item in Model)
-             {
-                 <tr>
-                     <td>@item.Name</td>
-                     <td>@item.Address</td>
-                     <td>@item.Phone</td>
-                     <td>@item.Description</td>
-                     <td>@item.Coast руб.</td>
-                 </tr>
-             }
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Address</td>
+                <td>@item.Phone</td>
+                <td>@item.Description</td>
+                <td>@item.Coast руб.</td>
+                <td>@item.Time ч.</td>
+                <td style="width: 120px">
+                    @for (int i = 1; i < 6; i++)
+                    {
+                        if (i <= Convert.ToDouble(ViewData[$"{item.CarrierId}"]))
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    }
+                </td>
+
+                <td>@Html.ActionLink("Отзывы", "CarrierFeedBacks", "Feedback", new {id = item.CarrierId}, new {}) </td>
+            </tr>
         }
-        </tbody>
-    </table>
+    }
+    </tbody>
+</table>
+<a class="card-link" href='javascript:history.go(-1)'><span class="fa fa fa-arrow-left"></span> На предыдущую страницу</a>
 </body>
 </html>

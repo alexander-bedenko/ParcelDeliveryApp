@@ -14,6 +14,7 @@ namespace ParcelDelivery.BLL.Infrastructure
             Bind<IUserService>().To<UserService>();
             Bind<ICarrierService>().To<CarrierService>();
             Bind<IPropertyService>().To<PropertyService>();
+            Bind<IFeedbackService>().To<FeedbackService>();
         }
     }
 }

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\CarrierDTO.cs" />
+    <Compile Include="DTO\FeedbackDTO.cs" />
     <Compile Include="DTO\PropertyDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Enums\TransportationArea.cs" />
@@ -70,8 +71,10 @@
     <Compile Include="Modules\AutoMapperBLLConfig.cs" />
     <Compile Include="Modules\HashProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IFeedbackService.cs" />
     <Compile Include="Services\Impl\CarrierService.cs" />
     <Compile Include="Services\ICarrierService.cs" />
+    <Compile Include="Services\Impl\FeedbackService.cs" />
     <Compile Include="Services\Impl\PropertyService.cs" />
     <Compile Include="Services\Impl\UserService.cs" />
     <Compile Include="Services\IPropertyService.cs" />

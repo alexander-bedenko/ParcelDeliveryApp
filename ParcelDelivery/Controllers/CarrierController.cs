@@ -17,16 +17,16 @@ namespace ParcelDelivery.Controllers
     {
         private readonly ICarrierService _carrierService;
         private readonly IUserService _userService;
-        private readonly IPropertyService _propertyService;
+        private readonly IFeedbackService _feedbackService;
 
         public CarrierController(
             ICarrierService carrierService,
             IUserService userService,
-            IPropertyService propertyService)
+            IFeedbackService feedbackService)
         {
             _carrierService = carrierService;
             _userService = userService;
-            _propertyService = propertyService;
+            _feedbackService = feedbackService;
         }
 
         // GET: Carrier
@@ -34,7 +34,25 @@ namespace ParcelDelivery.Controllers
         {
             int pageSize = 8;
             int pageNumber = (page ?? 1);
+            double averageRate = 0;
+            int sum = 0;
+            
             var carrier = Mapper.Map<IEnumerable<CarrierDTO>, IEnumerable<CarrierViewModel>>(_carrierService.ShowAllCarriers());
+
+            foreach (var item in carrier)
+            {
+                var rate = _feedbackService.GetProductFeedbacks(item.Id);
+                foreach (var k in rate)
+                {
+                    sum += k.Rating;
+                }
+                if(rate.Count() != 0)
+                    averageRate = sum / rate.Count();
+                ViewData.Add($"{item.Id}",averageRate);
+                averageRate = 0;
+                sum = 0;
+            }
+            
             return View(carrier.ToPagedList(pageNumber, pageSize));
         }
 
@@ -128,7 +146,24 @@ namespace ParcelDelivery.Controllers
         [Authorize]
         public ActionResult FilteredList()
         {
+            double averageRate = 0;
+            int sum = 0;
+
             var listOfCarriers = (IEnumerable<FilteredListViewModel>)TempData["carriers"];
+
+            foreach (var item in listOfCarriers)
+            {
+                var rate = _feedbackService.GetProductFeedbacks(item.CarrierId);
+                foreach (var k in rate)
+                {
+                    sum += k.Rating;
+                }
+                if (rate.Count() != 0)
+                    averageRate = sum / rate.Count();
+                ViewData.Add($"{item.CarrierId}", averageRate);
+                averageRate = 0;
+                sum = 0;
+            }
 
             return View(listOfCarriers);
         }

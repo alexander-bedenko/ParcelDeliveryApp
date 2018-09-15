@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using ParcelDelivery.Enums;
 
 namespace ParcelDelivery.Models
@@ -22,5 +21,8 @@ namespace ParcelDelivery.Models
 
         [Required(ErrorMessage = "Выберите регион доставки")]
         public TransportationArea TransportationArea { get; set; }
+
+        [Required(ErrorMessage = "Введите расстояние")]
+        public double Distance { get; set; }
     }
 }

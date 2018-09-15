@@ -1,6 +1,6 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <i class="fa fa-check"><a href="#">Hello, @User.Identity.Name! </a></i>
+    <i class="fa fa-check"><a href="#">Добро пожаловать, @User.Identity.Name! </a></i>
     <i class="fa fa-sign-out"><a href="@Url.Action("Logout", "Account")">Выйти </a></i>
     if (!User.Identity.Name.Equals("Admin"))
     {

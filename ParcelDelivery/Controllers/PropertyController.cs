@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using AutoMapper;
 using ParcelDelivery.BLL.DTO;
 using ParcelDelivery.BLL.Enums;
 using ParcelDelivery.BLL.Services;
 using ParcelDelivery.Models;
+using ParcelDelivery.Services;
 
 namespace ParcelDelivery.Controllers
 {
@@ -114,23 +113,54 @@ namespace ParcelDelivery.Controllers
                 .Where(toc => toc.TypeOfCargo.Equals((TypeOfCargo)property.TypeOfCargo))
                 .Where(ta => ta.TransportationArea.Equals((TransportationArea)property.TransportationArea))
                 .Where(w => w.MaxWeight > property.MaxWeight)
-                .Select(c => c.CarrierId);
-
+                .Select(c => c.CarrierId).ToList();
+            
             foreach (var key in filteredList)
             {
                 listOfCarriers.Add(new FilteredListViewModel()
                 {
+                    CarrierId = _carrierService.GetCarrier(key).Id,
                     Name = _carrierService.GetCarrier(key).Name,
                     Address = _carrierService.GetCarrier(key).Address,
                     Phone = _carrierService.GetCarrier(key).Phone,
                     Description = _carrierService.GetCarrier(key).Description,
-                    Coast = _propertyService.ShowAllPropertiesById(key).FirstOrDefault(p => p.CarrierId == key).Coast
+                    Coast = _propertyService.ShowAllPropertiesById(key).FirstOrDefault(p => p.CarrierId == key).Coast * (decimal)property.Distance,
+                    Type = _propertyService.ShowAllPropertiesById(key).FirstOrDefault(p => p.CarrierId == key).TransportationArea.GetDisplayName(),
+                    Time = TimeInTransit(
+                        property.Distance, 
+                        _propertyService.ShowAllPropertiesById(key).FirstOrDefault(p => p.CarrierId == key).TransportationArea.GetDisplayName())
                 });
             }
 
             TempData["carriers"] = listOfCarriers;
 
             return RedirectToAction("FilteredList", "Carrier");
+        }
+
+        private double TimeInTransit(double distance, string type)
+        {
+            double time = 0;
+
+            switch (type)
+            {
+                case "City":
+                    time = distance / 17;
+                    break;
+
+                case "Region":
+                    time = distance / 53;
+                    break;
+
+                case "Country":
+                    time = distance / 70;
+                    break;
+
+                case "International":
+                    time = distance / 90;
+                    break;
+            }
+
+            return Math.Round(time, 2);
         }
     }
 }

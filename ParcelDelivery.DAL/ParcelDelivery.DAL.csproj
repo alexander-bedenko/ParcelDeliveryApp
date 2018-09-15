@@ -51,10 +51,15 @@
     <Compile Include="EFDbContext\Impl\ParcelDeliveryContextInitializer.cs" />
     <Compile Include="EFDbContext\IParcelDeliveryContext.cs" />
     <Compile Include="Entities\Carrier.cs" />
+    <Compile Include="Entities\Feedback.cs" />
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\TransportationArea.cs" />
     <Compile Include="Enums\TypeOfParcel.cs" />
+    <Compile Include="Migrations\201809111259093_Added_feedback.cs" />
+    <Compile Include="Migrations\201809111259093_Added_feedback.Designer.cs">
+      <DependentUpon>201809111259093_Added_feedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
@@ -62,7 +67,11 @@
     <Compile Include="UoW\Impl\UnitOfWork.cs" />
     <Compile Include="UoW\IUnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809111259093_Added_feedback.resx">
+      <DependentUpon>201809111259093_Added_feedback.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

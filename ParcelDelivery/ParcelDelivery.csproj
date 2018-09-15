@@ -132,9 +132,9 @@
     <Content Include="Content\contactform\contactform.js" />
     <Content Include="Content\contactform\Readme.txt" />
     <Content Include="Content\css\jquery-ui.min.css" />
-    <Content Include="Content\css\scss-files.txt" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\about-img.jpg" />
+    <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\apple-touch-icon.png" />
     <Content Include="Content\img\clients\client-1.png" />
     <Content Include="Content\img\clients\client-2.png" />
@@ -161,6 +161,8 @@
     <Content Include="Content\img\preloader.gif" />
     <Content Include="Content\img\quote-sign-left.png" />
     <Content Include="Content\img\quote-sign-right.png" />
+    <Content Include="Content\img\rating\StarFade.gif" />
+    <Content Include="Content\img\rating\StarGlow.gif" />
     <Content Include="Content\img\team-1.jpg" />
     <Content Include="Content\img\team-2.jpg" />
     <Content Include="Content\img\team-3.jpg" />
@@ -207,6 +209,7 @@
     <Content Include="Content\lib\superfish\superfish.min.js" />
     <Content Include="Content\lib\wow\wow.js" />
     <Content Include="Content\lib\wow\wow.min.js" />
+    <Content Include="Content\Modal.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +235,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Error\NotFound.cshtml" />
@@ -246,6 +250,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarrierController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Enums\TransportationArea.cs" />
@@ -254,6 +259,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CarrierViewModel.cs" />
+    <Compile Include="Models\FeedbackViewModel.cs" />
     <Compile Include="Models\FilteredListViewModel.cs" />
     <Compile Include="Models\PropertyViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -282,6 +288,9 @@
     <Content Include="Views\Property\_Delete.cshtml" />
     <Content Include="Views\Property\FilterOptions.cshtml" />
     <Content Include="Views\Carrier\FilteredList.cshtml" />
+    <Content Include="Views\Feedback\_Create.cshtml" />
+    <Content Include="Views\Feedback\CarrierFeedbacks.cshtml" />
+    <Content Include="Views\Feedback\_Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

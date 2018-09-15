@@ -1081,3 +1081,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #footer .credits a {
   color: #0c2e8a;
 }
+
+.checked {
+    color: orange;
+}

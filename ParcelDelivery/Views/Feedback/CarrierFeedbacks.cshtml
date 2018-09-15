@@ -1,7 +1,4 @@
-﻿@using System.ComponentModel.DataAnnotations
-@using ParcelDelivery.Enums
-@using ParcelDelivery.Services
-@model IEnumerable<ParcelDelivery.Models.PropertyViewModel>
+﻿@model IEnumerable<ParcelDelivery.Models.FeedbackViewModel>
 
 @{
     Layout = null;
@@ -13,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Услуги курьера</title>
+    <title>Отзывы о курьере</title>
     <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
@@ -46,22 +43,23 @@
                 ID
             </th>
             <th>
-                Стоимость за 1 км.
+                Имя
             </th>
             <th>
-                Максимальный вес
+                Email
             </th>
             <th>
-                Тип груза
+                Отзыв
             </th>
             <th>
-                География доставки
+                Оценка
+            </th>
+            <th>
+                Дата
             </th>
             @if (User.Identity.Name.Equals("Admin"))
             {
-                <th>
-                    Действия
-                </th>
+                <th>Действия</th>
             }
         </tr>
         </thead>
@@ -70,27 +68,35 @@
         {
             <tr>
                 <td>@c.Id</td>
-                <td>@c.Coast</td>
-                <td>@c.MaxWeight</td>
-                <td>@c.TypeOfCargo.GetDisplayName()</td>
-                <td>@c.TransportationArea.GetDisplayName()</td>
+                <td>@c.Name</td>
+                <td>@c.Email</td>
+                <td>@c.Message</td>
+                <td style="width: 120px">
+                    @for (int i = 1; i < 6; i++)
+                    {
+                        if (i <= c.Rating)
+                        {
+                            <span class="fa fa-star checked"></span>
+                        }
+                        else
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    }
+                </td>
+                <td>@c.Date</td>
                 @if (User.Identity.Name.Equals("Admin"))
                 {
                     <td>
-                        @Html.ActionLink("Изменить", "Edit", "Property", new {id = c.Id},
-                            new {@class = "viewDialog", data_dialog_title = "Редактирование услуги"}) |
-                        @Html.ActionLink("Удалить", "Delete", "Property", new {id = c.Id},
-                            new {@class = "viewDialog", data_dialog_title = "Удаление услуги"})
+                        @Html.ActionLink("Удалить", "Delete", "Feedback", new {id = c.Id},
+                            new {@class = "viewDialog", data_dialog_title = "Удаление отзыва"})
                     </td>
                 }
             </tr>
         }
         </tbody>
     </table>
-    @if (User.Identity.Name.Equals("Admin"))
-    {
-        <p>@Html.ActionLink("Добавить услугу", "Create", "Property", new {id = @Url.RequestContext.RouteData.Values["id"]}, new {@class = "btn btn-primary btn-lg viewDialog", data_dialog_title = "Добавление услуги"})</p>
-    }
+    <p>@Html.ActionLink("Добавить отзыв", "Create", "Feedback", new {id = @Url.RequestContext.RouteData.Values["id"]}, new {@class = "btn btn-primary btn-lg viewDialog", data_dialog_title = "Добавление отзыва"})</p>
     <a class="card-link" href='javascript:history.go(-1)'><span class="fa fa fa-arrow-left"></span> На предыдущую страницу</a>
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
