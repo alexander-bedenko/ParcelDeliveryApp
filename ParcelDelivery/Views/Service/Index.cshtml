@@ -1,0 +1,100 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using ParcelDelivery.Enums
+@using ParcelDelivery.Services
+@model IEnumerable<ParcelDelivery.Models.ServiceViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Услуги курьера</title>
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Modal.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.min.css" />
+</head>
+
+<body>
+
+<section id="topbar" class="d-none d-lg-block">
+    <div class="container clearfix">
+        <div class="contact-info float-left">
+            @Html.ActionLink("   На главную", "Index", "Home", new { }, new { @class = "card-link fa fa-home" })
+            <i class="fa fa-phone"></i> +375 29 6-000-000
+        </div>
+        <div class="social-links float-right">
+            @Html.Partial("~/Views/Account/_LoginPartial.cshtml")
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <h2>Список услуг</h2>
+    <table class="table table-bordered table-hover thead-dark">
+        <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Стоимость за 1 км.
+            </th>
+            <th>
+                Максимальный вес
+            </th>
+            <th>
+                Тип груза
+            </th>
+            <th>
+                География доставки
+            </th>
+            @if (User.Identity.Name.Equals("Admin"))
+            {
+                <th>
+                    Действия
+                </th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.Coast</td>
+                <td>@c.MaxWeight</td>
+                <td>@c.TypeOfCargo.GetDisplayName()</td>
+                <td>@c.TransportationArea.GetDisplayName()</td>
+                @if (User.Identity.Name.Equals("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", "Property", new {id = c.Id},
+                            new {@class = "viewDialog", data_dialog_title = "Редактирование услуги"}) |
+                        @Html.ActionLink("Удалить", "Delete", "Property", new {id = c.Id},
+                            new {@class = "viewDialog", data_dialog_title = "Удаление услуги"})
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (User.Identity.Name.Equals("Admin"))
+    {
+        <p>@Html.ActionLink("Добавить услугу", "Create", "Property", new {id = @Url.RequestContext.RouteData.Values["id"]}, new {@class = "btn btn-primary btn-lg viewDialog", data_dialog_title = "Добавление услуги"})</p>
+    }
+    <a class="card-link" href='javascript:history.go(-1)'><span class="fa fa fa-arrow-left"></span> На предыдущую страницу</a>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Content/lib/jquery/jquery-ui.min.js"></script>
+<script src="~/Scripts/Modal.js"></script>
+</body>
+</html>

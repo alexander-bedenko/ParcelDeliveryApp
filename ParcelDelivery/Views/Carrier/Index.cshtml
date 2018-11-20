@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="~/Content/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/Content/Modal.css" />
+    <link href="../../Content/css/jquery-ui.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -72,8 +72,8 @@
                     else
                     {
                         <span class="fa fa-star"></span>
+                    }
                 }
-            }
                     </td>
                     @if (User.Identity.Name.Equals("Admin"))
                 {
@@ -102,8 +102,8 @@
         <a class="card-link" href='javascript:history.go(-1)'><span class="fa fa fa-arrow-left"></span> На предыдущую страницу</a>
     </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Content/lib/jquery/jquery-ui.min.js"></script>
 <script src="~/Scripts/Modal.js"></script>
+<script src="~/Content/lib/jquery/jquery-ui.min.js"></script>
 </body>
 </html>
 

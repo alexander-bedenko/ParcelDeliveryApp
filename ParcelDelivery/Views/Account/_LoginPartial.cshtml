@@ -4,7 +4,7 @@
     <i class="fa fa-sign-out"><a href="@Url.Action("Logout", "Account")">Выйти </a></i>
     if (!User.Identity.Name.Equals("Admin"))
     {
-        <i class="fa fa-sign-out"><a href="@Url.Action("Edit", "Account")">Редактировать </a></i>
+    <i class="fa fa-edit">@Html.ActionLink("Редактировать", "Edit", "Account", new { }, new { @class = "viewDialog", data_dialog_title = "Редактирование профиля" })</i>
     }
 
     if (User.Identity.Name.Equals("Admin"))
@@ -12,8 +12,9 @@
         <i class="fa fa-user"><a href="@Url.Action("Index", "Carrier")">Администрирование </a></i>
     }
 }
+
 else
 {
-    <i class="fa fa-sign-in"><a href="@Url.Action("Login", "Account")">Войти </a></i>
-    <i class="fa fa-user-plus"><a href="@Url.Action("Register", "Account")">Зарегистрироваться</a></i>
+    <i class="fa fa-sign-in">@Html.ActionLink("Войти", "Login", "Account", new { }, new { @class = "viewDialog", data_dialog_title = "Вход в систему " })</i>
+    <i class="fa fa-user-plus">@Html.ActionLink("Зарегистрироваться", "Register", "Account", new { }, new { @class = "viewDialog", data_dialog_title = "Регистрация пользователя " })</i>
 }

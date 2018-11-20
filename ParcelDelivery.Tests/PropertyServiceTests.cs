@@ -10,15 +10,15 @@ namespace ParcelDelivery.Tests
     [TestFixture]
     public class PropertyServiceTests
     {
-        private PropertyDTO _property;
-        private IPropertyService _propertyService;
+        private ServiceDTO _property;
+        private IServiceService _propertyService;
 
         [SetUp]
         public void SetUp()
         {
-            _propertyService = A.Fake<IPropertyService>();
+            _propertyService = A.Fake<IServiceService>();
 
-            _property = new PropertyDTO
+            _property = new ServiceDTO
             {
                 CarrierId = 1,
                 Coast = 3.5m,
@@ -31,8 +31,8 @@ namespace ParcelDelivery.Tests
         [Test]
         public void WhenGetPropertyById()
         {
-            A.CallTo(() => _propertyService.GetProperty(A<int>._)).Returns(_property);
-            var property = _propertyService.GetProperty(1);
+            A.CallTo(() => _propertyService.GetService(A<int>._)).Returns(_property);
+            var property = _propertyService.GetService(1);
             
             Assert.NotNull(property);
             Assert.AreEqual(3.5m, _property.Coast);
@@ -41,9 +41,9 @@ namespace ParcelDelivery.Tests
         [Test]
         public void WhenShowAllPropertiesByCarrierId()
         {
-            var properties = new List<PropertyDTO>
+            var properties = new List<ServiceDTO>
             {
-                new PropertyDTO()
+                new ServiceDTO()
                 {
                     CarrierId = 1,
                     Coast = 3.5m,
@@ -53,8 +53,8 @@ namespace ParcelDelivery.Tests
                 }
             };
 
-            A.CallTo(() => _propertyService.ShowAllPropertiesById(A<int>._)).Returns(properties);
-            var props = _propertyService.ShowAllPropertiesById(1);
+            A.CallTo(() => _propertyService.ShowAllServicesById(A<int>._)).Returns(properties);
+            var props = _propertyService.ShowAllServicesById(1);
 
             Assert.NotNull(props);
         }

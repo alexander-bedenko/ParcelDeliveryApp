@@ -1,6 +1,6 @@
 ﻿@model ParcelDelivery.Models.FeedbackViewModel
 
-<h3>Вы действительно хотите удалить отзыв?</h3>
+<h4>Вы действительно хотите удалить отзыв?</h4>
 <div>
     <p>Номер.: @Html.DisplayFor(m => m.Id)</p>
     <p>Название: @Html.DisplayFor(m => m.Name)</p>
@@ -11,6 +11,6 @@
     {
         @Html.AntiForgeryToken()
 
-        <input type="submit" class="btn btn-primary" value="Удалить" />
+        <input type="submit" class="btn btn-block btn-danger" value="Удалить" />
     }
 </div>

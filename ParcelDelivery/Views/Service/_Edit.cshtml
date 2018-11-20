@@ -1,0 +1,47 @@
+﻿@using ParcelDelivery.Enums
+@model ParcelDelivery.Models.ServiceViewModel
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CarrierId)
+        <div>
+            <p>@Html.ValidationMessageFor(model => model.Coast, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.Coast, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Стоимость за 1 км." } })</p>
+        </div>
+
+        <div>
+            <p>@Html.ValidationMessageFor(model => model.MaxWeight, "", new { @class = "text-danger" })</p>
+            <p>@Html.EditorFor(model => model.MaxWeight, new { htmlAttributes = new { @class = "form-control", style = "min-width: 100%", placeholder = "Максимальный вес, тонн" } })</p>
+        </div>
+
+        <div class="dropdown">
+            @Html.ValidationMessageFor(model => model.TypeOfCargo, "", new { @class = "text-danger" })
+            <p>
+                @Html.DropDownList("TypeOfCargo",
+                         EnumHelper.GetSelectList(typeof(TypeOfCargo)),
+                         "Выберите тип груза",
+                         new { @class = "form-control" })
+            </p>
+        </div>
+
+        <div class="dropdown">
+            @Html.ValidationMessageFor(model => model.TransportationArea, "", new { @class = "text-danger" })
+            <p>
+                @Html.DropDownList("TransportationArea",
+                         EnumHelper.GetSelectList(typeof(TransportationArea)),
+                         "Выберите область доставки",
+                         new { @class = "form-control" })
+            </p>
+        </div>
+
+        <p><input type="submit" class="btn btn-block btn-success" value="Сохранить" /></p>
+    }
+</div>
+

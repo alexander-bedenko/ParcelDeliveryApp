@@ -31,10 +31,7 @@ namespace ParcelDelivery.Controllers
 
         public ActionResult Create()
         {
-            var carrierId = Url.RequestContext.RouteData.Values["id"];
-
-            var feedback = _feedbackService.GetProductFeedbacks(Convert.ToInt32(carrierId)).FirstOrDefault();
-            return PartialView("_Create", Mapper.Map<FeedbackDTO, FeedbackViewModel>(feedback));
+            return PartialView("_Create");
         }
 
         [HttpPost]

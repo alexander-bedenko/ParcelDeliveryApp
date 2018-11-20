@@ -12,7 +12,7 @@ namespace ParcelDelivery.DAL.Entities
         public string Description { get; set; }
         public int? UserId { get; set; }
         public User User { get; set; }
-        public ICollection<Property> Properties { get; set; } = new HashSet<Property>();
+        public ICollection<Service> Services { get; set; } = new HashSet<Service>();
         public virtual ICollection<Feedback> Feedbacks { get; set; } = new HashSet<Feedback>();
     }
 }

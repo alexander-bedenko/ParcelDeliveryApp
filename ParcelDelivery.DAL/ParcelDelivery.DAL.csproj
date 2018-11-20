@@ -52,7 +52,7 @@
     <Compile Include="EFDbContext\IParcelDeliveryContext.cs" />
     <Compile Include="Entities\Carrier.cs" />
     <Compile Include="Entities\Feedback.cs" />
-    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Service.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\TransportationArea.cs" />
     <Compile Include="Enums\TypeOfParcel.cs" />
@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

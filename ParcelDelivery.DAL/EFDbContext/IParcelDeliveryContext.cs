@@ -10,7 +10,7 @@ namespace ParcelDelivery.DAL.EFDbContext
         /// </summary>
         DbSet<User> Users { get; }
         DbSet<Carrier> Carriers { get; }
-        DbSet<Property> Properties { get; }
+        DbSet<Service> Properties { get; }
         DbSet<Feedback> Feedbacks { get; }
         DbSet<T> Set<T>() where T : class;
     }

@@ -19,10 +19,11 @@ namespace ParcelDelivery.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView("_Register");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(UserViewModel user)
         {
             if (ModelState.IsValid)
@@ -38,16 +39,17 @@ namespace ParcelDelivery.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            return View(user);
+            return RedirectToAction("Index", "Home", user);
         }
 
         [Authorize]
         public ActionResult Edit()
         {
-            return View();
+            return PartialView("_Edit");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(UserViewModel user)
         {
             user.Login = User.Identity.Name;
@@ -57,13 +59,13 @@ namespace ParcelDelivery.Controllers
                 _userService.EditUser(Mapper.Map<UserDTO>(user));
                 return RedirectToAction("Index", "Home");
             }
-            return View(user);
+            return RedirectToAction("Index", "Home", user);
         }
 
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return PartialView("_Login");
         }
 
         [HttpPost]
@@ -82,7 +84,7 @@ namespace ParcelDelivery.Controllers
                 ModelState.AddModelError("", "Имя пользователя или пароль не верны.");
             }
 
-            return View(user);
+            return RedirectToAction("Index", "Home", user);
         }
 
         [Authorize(Users = "Admin")]

@@ -12,21 +12,17 @@
                 title: $(this).attr("data-dialog-title"),
                 show: {
                     effect: "blind",
-                    duration: 1000
+                    duration: 500
                 },
                 hide: {
                     effect: "explode",
-                    duration: 1000
+                    duration: 500
                 },
-                minHeight: 450,
-                height: "auto",
-                width: 450,
+                width: 'auto',
                 dialogClass: 'dialogWithDropShadow',
-                close: function () {$(this).remove()},
+                close: function () { $(this).remove() },
                 modal: true,
-                my: "center",
-                at: "center",
-                of: window
+                position: { my: "center", at: "top" }
             })
             .load(this.href);
     });

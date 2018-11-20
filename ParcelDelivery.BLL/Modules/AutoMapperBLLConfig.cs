@@ -11,7 +11,7 @@ namespace ParcelDelivery.BLL.Modules
         {
             cfg.CreateMap<User, UserDTO>().ReverseMap();
             cfg.CreateMap<Carrier, CarrierDTO>().ReverseMap();
-            cfg.CreateMap<Property, PropertyDTO>().ReverseMap();
+            cfg.CreateMap<Service, ServiceDTO>().ReverseMap();
             cfg.CreateMap<Feedback, FeedbackDTO>().ReverseMap();
         };
     }
